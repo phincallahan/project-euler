@@ -12,7 +12,6 @@ int main() {
             for(int j = 2; i*j <= N; j++) {
                 prime[i*j-1] = 1;
             }
-            sum += i;
         }
     }
 
