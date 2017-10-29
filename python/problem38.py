@@ -1,18 +1,15 @@
+from lib.performance import do_cprofile
 from itertools import permutations, islice
 
+@do_cprofile
+def solution():
+    def num_islice(* args):
+        return sum(d * 10 ** i for i, d in enumerate(islice(* args)))
 
-def take_digits(perm, i, j = 0):
-    if j > 0:
-        return int(''.join(perm[i:j]))
-    else:
-        return int(''.join(perm[:i]))
+    for perm in permutations(x for x in range(1, 10)):
+        x, y = num_islice(perm, 5, 9), num_islice(perm, 5)
 
-i = 0
-digits = [str(x) for x in reversed(range(1, 10))]
-for perm in permutations(digits):
-    x = take_digits(perm, 4)
-    y = take_digits(perm, 4, 9)
+        if y % x == 0 and y / x == 2:
+            return num_islice(perm, 9)
 
-    if y % x == 0 and y / x == 2:
-        print(take_digits(perm, 9))
-        break
+solution()
