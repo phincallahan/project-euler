@@ -1,16 +1,23 @@
-def isPalindrome(s):
-    if type(s) == int:
-        s = str(s)
+from lib.performance import do_cprofile
+from lib.palindrome import isPalindrome
+from lib.permutations import binary_permutations
 
-    for i in range(len(s) // 2):
-        if s[i] != s[len(s) - 1 - i]:
-            return False
-    
-    return True
+@do_cprofile
+def solution1():
+    cond = lambda i: isPalindrome(i) and isPalindrome(bin(i)[2:])
+    return sum(i for i in range(10 ** 6) if cond(i))
 
-s = 0
-for i in range(10 ** 6):
-    if isPalindrome(i) and isPalindrome(bin(i)[2:]):
-        s += i
+@do_cprofile
+def solution2():
+    palindrome_sum = 0
+    for perm in binary_permutations(10):
+        palindromes = (perm[::-1] + c + perm for c in ['0', '1', ''])
+        ints = [int(p, 2) for p in palindromes if int(p, 2) < 10 ** 6]
+        if not ints: 
+            return(palindrome_sum)
 
-print(s)
+        palindrome_sum += sum(i for i in ints if isPalindrome(i))
+
+    return(palindrome_sum)
+
+solution2()
