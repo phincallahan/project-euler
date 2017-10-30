@@ -1,4 +1,4 @@
-from lib.primes import miller_rabin
+from lib.primes import isPrime
 from lib.performance import do_cprofile
 
 @do_cprofile
@@ -10,11 +10,11 @@ def solution():
         nHarshad = []
         for x, s in harshad:
             nHarshad.append((x * 10, s))
-            xIsPrime = miller_rabin(x // s)
+            xIsPrime = isPrime(x // s)
             for i in range(1, 10):
                 if not (10 * x + i) % (s + i):
                     nHarshad.append(((10 * x + i), s + i))
-                if xIsPrime and miller_rabin(10 * x + i):
+                if xIsPrime and isPrime(10 * x + i):
                     result += 10 * x + i
             
         harshad = nHarshad

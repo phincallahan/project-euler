@@ -1,10 +1,8 @@
 from lib.performance import do_cprofile
-from lib.primes import prime_sieve, isPrime
+from lib.primes import isPrime
 
 @do_cprofile
 def solution():
-    primes = prime_sieve(10 ** 4)
-
     rq = set([2, 3, 7, 5])
     lq = set([2, 3, 7, 5])
     trunc = set()
