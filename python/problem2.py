@@ -10,5 +10,3 @@ def fib():
 def solution():
     bounded_fib = takewhile(lambda x: x < 4 * 10 ** 6, fib()) 
     return sum(x for x in bounded_fib if x % 2 == 0)
-
-print(solution())
