@@ -7,5 +7,3 @@ def solution():
         for j in range(i, 99, -1):
             if isPalindrome(j * i) and i * j > m:
                 m = i * j 
-
-print(solution())
