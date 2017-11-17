@@ -1,6 +1,9 @@
-from lib.primes import prime_sieve
-from lib.factorization import factor
+from itertools import count, takewhile
+from lib.factorization import factor_method
 
-def solution():
-    factorization = factor(600851475143, prime_sieve(10000))
-    return max(k for k in factorization)
+def solution(N = 600851475143):
+    for i in takewhile(lambda _: N > 1, count(2)):
+        while N % i == 0: N //= i
+    return i
+
+print(solution())
