@@ -7,5 +7,3 @@ def solution():
         factorization |= factor(num)
 
     return int(factorization)
-
-print(solution())
